@@ -23,15 +23,15 @@ class _HomePageState extends State<HomePage> {
     return Column(
       children: [
         Expanded(
-          child: Container(
-            padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
-            child: GridView.count(
-              crossAxisSpacing: 16,
-              mainAxisSpacing: 16,
-              crossAxisCount: 2,
-              childAspectRatio: .90,
-              children: [
-                Card(
+          child: GridView.count(
+            primary: false,
+            padding: const EdgeInsets.all(20),
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            crossAxisCount: 2,
+            children: <Widget>[
+              Container(
+                child: Card(
                   elevation: 2,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8)),
@@ -48,7 +48,10 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                Card(
+                color: Colors.teal[100],
+              ),
+              Container(
+                child: Card(
                   elevation: 2,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8)),
@@ -64,11 +67,116 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                )
-              ],
-            ),
+                ),
+                color: Colors.teal[200],
+              ),
+              Container(
+                child: const Text('Sound of screams but the'),
+                color: Colors.teal[300],
+              ),
+              Container(
+                child: const Text('Who scream'),
+                color: Colors.teal[400],
+              ),
+              Container(
+                child: Card(
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8)),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'Peso',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      ListTile(
+                        title: Text(
+                          "62",
+                          style: TextStyle(color: Colors.white, fontSize: 30),
+                        ),
+                      ),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            FloatingActionButton(
+                              backgroundColor: Colors.grey,
+                              onPressed: () {},
+                              child: Center(
+                                  child: Icon(
+                                Icons.add_rounded,
+                                color: Colors.white,
+                                size: 30,
+                              )),
+                            ),
+                            FloatingActionButton(
+                              backgroundColor: Colors.grey,
+                              onPressed: () {},
+                              child: Icon(
+                                Icons.add_rounded,
+                                color: Colors.white,
+                                size: 30,
+                              ),
+                            ),
+                          ]),
+                    ],
+                  ),
+                ),
+                color: Colors.teal[500],
+              ),
+              Container(
+                child: Card(
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8)),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'Peso',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      ListTile(
+                        title: Text(
+                          "62",
+                          style: TextStyle(color: Colors.white, fontSize: 30),
+                        ),
+                      ),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            FloatingActionButton(
+                              backgroundColor: Colors.grey,
+                              onPressed: () {},
+                              child: Center(
+                                  child: Icon(
+                                Icons.add_rounded,
+                                color: Colors.white,
+                                size: 30,
+                              )),
+                            ),
+                            FloatingActionButton(
+                              backgroundColor: Colors.grey,
+                              onPressed: () {},
+                              child: Icon(
+                                Icons.add_rounded,
+                                color: Colors.white,
+                                size: 30,
+                              ),
+                            ),
+                          ]),
+                    ],
+                  ),
+                ),
+                color: Colors.teal[600],
+              ),
+            ],
           ),
-        )
+        ),
       ],
     );
   }
