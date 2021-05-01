@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:imc/page/resultado.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -9,6 +10,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  double estatura = 166;
+  int labelEstatura = 166;
+  int peso = 62;
+  int edad = 38;
+  String sexo = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,10 +70,10 @@ class _HomePageState extends State<HomePage> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Image(
-                                image: AssetImage('assets/male.png'),
+                                image: AssetImage('assets/female.png'),
                                 width: 50,
                                 height: 50),
-                            Text('Hombre',
+                            Text('Mujer',
                                 style: TextStyle(color: Colors.white70))
                           ],
                         ),
@@ -94,11 +101,37 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Image(
-                            image: AssetImage('assets/male.png'),
-                            width: 50,
-                            height: 50),
-                        Text('Hombre', style: TextStyle(color: Colors.white70))
+                        Title(color: Colors.white, child: Text("Estatura")),
+                        Text.rich(
+                          TextSpan(
+                            text: '', // default text style
+                            children: <TextSpan>[
+                              TextSpan(
+                                  text: labelEstatura.toString(),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 35)),
+                              TextSpan(
+                                  text: 'cm',
+                                  style:
+                                      TextStyle(fontStyle: FontStyle.normal)),
+                            ],
+                          ),
+                        ),
+                        Slider(
+                          activeColor: Colors.white,
+                          inactiveColor: Colors.white70,
+                          value: estatura,
+                          min: 0,
+                          max: 300,
+                          label: "$labelEstatura",
+                          onChanged: (valor) {
+                            setState(() {
+                              estatura = valor;
+                              labelEstatura = valor.round();
+                            });
+                          },
+                        )
                       ],
                     ),
                   ),
@@ -113,7 +146,7 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Container(
-                height: 170,
+                height: 160,
                 width: 150,
                 child: Card(
                   elevation: 2,
@@ -128,32 +161,35 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
-                      ListTile(
-                        title: Text(
-                          "62",
-                          style: TextStyle(color: Colors.white, fontSize: 30),
+                      Text.rich(
+                        TextSpan(
+                          text: '', // default text style
+                          children: <TextSpan>[
+                            TextSpan(
+                                text: peso.toString(),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 35)),
+                          ],
                         ),
                       ),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            FloatingActionButton(
-                              backgroundColor: Colors.grey,
-                              onPressed: () {},
+                            TextButton(
+                              onPressed: _pesoBajar,
                               child: Center(
                                   child: Icon(
-                                Icons.add_rounded,
-                                color: Colors.white,
-                                size: 30,
+                                Icons.remove_circle_sharp,
+                                color: Colors.grey,
+                                size: 50,
                               )),
                             ),
-                            FloatingActionButton(
-                              backgroundColor: Colors.grey,
-                              onPressed: () {},
+                            TextButton(
+                              onPressed: _pesoSubir,
                               child: Icon(
-                                Icons.add_rounded,
-                                color: Colors.white,
-                                size: 30,
+                                Icons.add_circle_sharp,
+                                color: Colors.grey,
+                                size: 50,
                               ),
                             ),
                           ]),
@@ -162,7 +198,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Container(
-                height: 170,
+                height: 160,
                 width: 150,
                 child: Card(
                   elevation: 2,
@@ -173,36 +209,39 @@ class _HomePageState extends State<HomePage> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          'Peso',
+                          'Edad',
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
-                      ListTile(
-                        title: Text(
-                          "62",
-                          style: TextStyle(color: Colors.white, fontSize: 30),
+                      Text.rich(
+                        TextSpan(
+                          text: '', // default text style
+                          children: <TextSpan>[
+                            TextSpan(
+                                text: edad.toString(),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 35)),
+                          ],
                         ),
                       ),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            FloatingActionButton(
-                              backgroundColor: Colors.grey,
-                              onPressed: () {},
+                            TextButton(
+                              onPressed: _edadBajar,
                               child: Center(
                                   child: Icon(
-                                Icons.add_rounded,
-                                color: Colors.white,
-                                size: 30,
+                                Icons.remove_circle_sharp,
+                                color: Colors.grey,
+                                size: 50,
                               )),
                             ),
-                            FloatingActionButton(
-                              backgroundColor: Colors.grey,
-                              onPressed: () {},
+                            TextButton(
+                              onPressed: _edadSubir,
                               child: Icon(
-                                Icons.add_rounded,
-                                color: Colors.white,
-                                size: 30,
+                                Icons.add_circle,
+                                color: Colors.grey,
+                                size: 50,
                               ),
                             ),
                           ]),
@@ -217,179 +256,52 @@ class _HomePageState extends State<HomePage> {
           color: Colors.pink,
           height: 90,
           child: Row(
-            children: [],
-          ),
-        ),
-        /*  Expanded(
-          child: GridView.count(
-            primary: false,
-            padding: const EdgeInsets.all(20),
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-            crossAxisCount: 2,
-            children: <Widget>[
-              Container(
-                child: Card(
-                  elevation: 2,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8)),
-                  child: Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Image(
-                            image: AssetImage('assets/male.png'),
-                            width: 50,
-                            height: 50),
-                        Text('Hombre', style: TextStyle(color: Colors.white70))
-                      ],
-                    ),
-                  ),
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              TextButton(
+                style: TextButton.styleFrom(
+                  primary: Colors.white,
                 ),
-              ),
-              Container(
-                child: Card(
-                  elevation: 2,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8)),
-                  child: Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Image(
-                            image: AssetImage('assets/female.png'),
-                            width: 50,
-                            height: 50),
-                        Text('Mujer', style: TextStyle(color: Colors.white70))
-                      ],
-                    ),
-                  ),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ResultadosPage(
+                              peso: peso, estatura: estatura, sexo: '')));
+                },
+                child: Text(
+                  'Calcular',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                 ),
-              ),
-              Container(
-                child: Card(
-                  elevation: 2,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8)),
-                  child: Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Image(
-                            image: AssetImage('assets/male.png'),
-                            width: 50,
-                            height: 50),
-                        Text('Hombre', style: TextStyle(color: Colors.white70))
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                child: Card(
-                  elevation: 2,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8)),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          'Peso',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                      ListTile(
-                        title: Text(
-                          "62",
-                          style: TextStyle(color: Colors.white, fontSize: 30),
-                        ),
-                      ),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            FloatingActionButton(
-                              backgroundColor: Colors.grey,
-                              onPressed: () {},
-                              child: Center(
-                                  child: Icon(
-                                Icons.add_rounded,
-                                color: Colors.white,
-                                size: 30,
-                              )),
-                            ),
-                            FloatingActionButton(
-                              backgroundColor: Colors.grey,
-                              onPressed: () {},
-                              child: Icon(
-                                Icons.add_rounded,
-                                color: Colors.white,
-                                size: 30,
-                              ),
-                            ),
-                          ]),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                child: Card(
-                  elevation: 2,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8)),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          'Peso',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                      ListTile(
-                        title: Text(
-                          "62",
-                          style: TextStyle(color: Colors.white, fontSize: 30),
-                        ),
-                      ),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            FloatingActionButton(
-                              backgroundColor: Colors.grey,
-                              onPressed: () {},
-                              child: Center(
-                                  child: Icon(
-                                Icons.add_rounded,
-                                color: Colors.white,
-                                size: 30,
-                              )),
-                            ),
-                            FloatingActionButton(
-                              backgroundColor: Colors.grey,
-                              onPressed: () {},
-                              child: Icon(
-                                Icons.add_rounded,
-                                color: Colors.white,
-                                size: 30,
-                              ),
-                            ),
-                          ]),
-                    ],
-                  ),
-                ),
-              ),
+              )
             ],
           ),
         ),
-        Container(
-          color: Colors.pink,
-          height: 80,
-          child: Row(
-            children: [],
-          ),
-        ),*/
       ],
     );
+  }
+
+  void _pesoSubir() {
+    setState(() {
+      peso++;
+    });
+  }
+
+  void _pesoBajar() {
+    setState(() {
+      peso--;
+    });
+  }
+
+  void _edadSubir() {
+    setState(() {
+      edad++;
+    });
+  }
+
+  void _edadBajar() {
+    setState(() {
+      edad--;
+    });
   }
 }
